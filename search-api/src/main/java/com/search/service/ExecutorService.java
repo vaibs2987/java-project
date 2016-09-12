@@ -22,19 +22,21 @@ public class ExecutorService implements Runnable {
 
 	public void setActualScore(Set<String> queries, String text,
 			ProductReview productReview) {
-		int size = queries.size();
+		double size = queries.size();
 		String[] array = text.split(" ");
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		for (String str : array) {
-			for (String query : queries) {
-				if (query.equalsIgnoreCase(str) && map.get(query) == null) {
-					map.put(query, 1);
+			if (map.size() < size) {
+				for (String query : queries) {
+					if (query.equalsIgnoreCase(str) && map.get(query) == null) {
+						map.put(query, 1);
 
+					}
 				}
 			}
 		}
-
-		productReview.setActualScore(map.size() / size);
+		double mapSize = map.size();
+		productReview.setActualScore(mapSize / size);
 	}
 
 	@Override
@@ -42,6 +44,7 @@ public class ExecutorService implements Runnable {
 		setActualScore(queries, productReview.getReviewText(), productReview);
 	}
 
+	
 
 }
 
