@@ -61,8 +61,7 @@ public class ReadingFile {
 						productReview.setSummary(data);
 					} else if (line.startsWith("review/text")) {
 						productReview.setReviewText(data);
-						taskExecutor.execute(new ExecutorService(queries, data,
-								productReview));
+						taskExecutor.execute(new ExecutorService(queries, productReview));
 						productReviews.add(productReview);
 					}
 
